@@ -24,17 +24,14 @@ class Parser:
 
     @sanitize_output
     def get_description(self):
-        try:
-            meta = self.soup.find("meta", {"property": "og:description"})
-            if meta:
-                return meta["content"]
+        meta = self.soup.find("meta", {"property": "og:description"})
+        if meta:
+            return meta.get("content", "")
 
-            meta = self.soup.find("meta", {"name": "description"})
-            if meta:
-                return meta["content"]
-            return ""
-        except TypeError:
-            return ""
+        meta = self.soup.find("meta", {"name": "description"})
+        if meta:
+            return meta.get("content", "")
+        return ""
 
 
 if __name__ == "__main__":

@@ -11,7 +11,8 @@ def run_crawler(args):
     cralwer = Crawler(manager)
     cralwer.parse(args.bookmark_file)
     cralwer.retrieve()
-    manager.export(args.csv_file, lambda x: x.title != "" and x.description != "")
+    manager.export(args.csv_file, lambda x: x.title !=
+                   "" and x.description != "")
 
 
 def run_embedder(args):
@@ -106,7 +107,8 @@ def run_all(args):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Process and visualize bookmark data.")
+    parser = argparse.ArgumentParser(
+        description="Process and visualize bookmark data.")
     parser.add_argument(
         "-d", "--dir", type=str, help="Path to the bookmark directory.", default="data"
     )
@@ -151,17 +153,20 @@ def parse_args():
     lda_parser.set_defaults(func=run_lda)
 
     select_parser = subcmd.add_parser("select", help="Select clusters.")
-    select_parser.add_argument("save_file", type=str, help="Path to the bookmark file.")
+    select_parser.add_argument(
+        "save_file", type=str, help="Path to the bookmark file.")
     select_parser.add_argument(
         "clusters", type=int, nargs="+", help="Clusters to select."
     )
     select_parser.set_defaults(func=run_select_clusters)
 
-    visualizer_parser = subcmd.add_parser("visualize", help="Run the visualizer.")
+    visualizer_parser = subcmd.add_parser(
+        "visualize", help="Run the visualizer.")
     visualizer_parser.set_defaults(func=run_visualizer)
 
     render_parser = subcmd.add_parser("export", help="Render the clusters.")
-    render_parser.add_argument("output_file", type=str, help="Path to the output file.")
+    render_parser.add_argument(
+        "output_file", type=str, help="Path to the output file.")
     render_parser.add_argument(
         "--template_file",
         type=str,
